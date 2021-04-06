@@ -2,6 +2,7 @@ import React from "react";
 import { createContext, useReducer } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import api from "../services/api";
+import createDataContext from "./createDataContext";
 
 const TOKEN_KEY = "@TrackersApp";
 
@@ -90,23 +91,32 @@ const initialAuthState: IAuthState = {
 //     authDispatch: () => {},
 // });
 
-const AuthContext = createContext<IAuthContextProps>({} as IAuthContextProps);
+// const AuthContext = createContext<IAuthContextProps>({} as IAuthContextProps);
 
-const AuthProvider: React.FC = ({ children }) => {
-    const [state, dispatch] = useReducer(authReducer, initialAuthState);
+// const AuthProvider: React.FC = ({ children }) => {
+//     const [state, dispatch] = useReducer(authReducer, initialAuthState);
 
-    return (
-        <AuthContext.Provider
-            value={{
-                authState: state,
-                signUp,
-                signIn,
-                signOut,
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
-};
+//     return (
+//         <AuthContext.Provider
+//             value={{
+//                 authState: state,
+//                 signUp,
+//                 signIn,
+//                 signOut,
+//             }}
+//         >
+//             {children}
+//         </AuthContext.Provider>
+//     );
+// };
 
-export { AuthContext, AuthProvider };
+// export { AuthContext, AuthProvider };
+
+export const { Provider, Context } = createDataContext(
+    authReducer,
+    [signUp, signIn, signOut],
+    {
+        token: null,
+        errorMessage: "",
+    },
+);

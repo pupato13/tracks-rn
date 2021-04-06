@@ -25,3 +25,49 @@
 
 //     return { Context, Provider };
 // }
+
+import React, { createContext, useReducer } from "react";
+
+interface IAuthState {
+    token?: string | null;
+    errorMessage?: string | null;
+}
+
+interface IAuthAction {
+    type: "add_error" | "sign_up";
+    payload: string;
+}
+
+interface IAuthContextProps {
+    authState: IAuthState;
+    signUp: (dispatch: React.Dispatch<IAuthAction>) => void;
+    signIn: (dispatch: React.Dispatch<IAuthAction>) => void;
+    signOut: (dispatch: React.Dispatch<IAuthAction>) => void;
+}
+
+export default (reducer: any, actions: any, initialState: IAuthState) => {
+    const Context = createContext<IAuthContextProps>({} as IAuthContextProps);
+
+    const Provider = ({ children }) => {
+        const [state, dispatch] = useReducer(reducer, initialState);
+
+        const boundActions: any = {};
+
+        for (let key in actions) {
+            boundActions[key] = actions[key](dispatch);
+        }
+
+        return (
+            <Context.Provider
+                value={{
+                    authState: state,
+                    ...actions,
+                }}
+            >
+                {children}
+            </Context.Provider>
+        );
+    };
+
+    return { Context, Provider };
+};
