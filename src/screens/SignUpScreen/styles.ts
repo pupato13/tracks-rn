@@ -18,8 +18,28 @@ export const Spacer = styled.View`
 `;
 
 export const ErrorMessage = styled.Text`
-    size: 16px;
+    font-size: 16px;
     color: #c53030;
     text-align: center;
     margin-bottom: 16px;
+`;
+
+export const Row = styled.View`
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 8px;
+`;
+
+export const InputElement = styled.TextInput`
+    padding: 16px 8px;
+    font-size: 16px;
+    background-color: #fff;
+    flex: 1;
+    padding: 8px;
+`;
+
+export const InputLabel = styled.Text`
+    color: #b2d235;
+    font-size: 16px;
+    font-weight: 700;
 `;

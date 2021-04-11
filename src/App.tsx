@@ -6,6 +6,7 @@ import Routes from "./routes";
 import { authReducer } from "./context/authReducer";
 import { initialState } from "./context/authState";
 import { AuthProvider } from "./context/autoContext";
+import { DiegoProvider } from "./context/diego";
 
 const App: React.FC = () => {
     // const [authState, authDispatch] = useReducer(authReducer, initialAuthState);
@@ -23,13 +24,13 @@ const App: React.FC = () => {
     // };
 
     return (
-        <AuthProvider>
-            <NavigationContainer>
+        <NavigationContainer>
+            <DiegoProvider>
                 <View style={{ flex: 1, backgroundColor: "#312e38" }}>
                     <Routes />
                 </View>
-            </NavigationContainer>
-        </AuthProvider>
+            </DiegoProvider>
+        </NavigationContainer>
     );
 };
 

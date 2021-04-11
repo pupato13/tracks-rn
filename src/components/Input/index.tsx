@@ -7,17 +7,17 @@ import React, {
     useRef,
     useState,
 } from "react";
-import { TextInput } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import { Container, Label, InputElement } from "./styles";
 
-interface IInputProps {
+interface IInputProps extends TextInputProps {
     label: string;
     value: string;
-    autoFocus: boolean;
-    autoCapitalize: "none" | "sentences" | "words" | "characters";
-    autoCorrect: boolean;
+    // autoFocus: boolean;
+    // autoCapitalize: "none" | "sentences" | "words" | "characters";
+    // autoCorrect: boolean;
     defaultValue?: string;
     required?: boolean;
 }
@@ -26,9 +26,9 @@ const Input: ForwardRefRenderFunction<unknown, IInputProps> = (
     {
         label,
         value,
-        autoFocus = false,
-        autoCapitalize = "none",
-        autoCorrect = false,
+        // autoFocus = false,
+        // autoCapitalize = "none",
+        // autoCorrect = false,
         defaultValue,
         required,
         ...rest
@@ -124,9 +124,9 @@ const Input: ForwardRefRenderFunction<unknown, IInputProps> = (
             <InputElement
                 ref={inputElementRef}
                 value={value}
-                autoFocus={autoFocus}
-                autoCapitalize={autoCapitalize}
-                defaultValue={defaultValue}
+                // autoFocus={autoFocus}
+                // autoCapitalize={autoCapitalize}
+                // defaultValue={defaultValue}
                 onFocus={handleInputFocus}
                 onBlur={handleInputBlur}
                 onChangeText={value => handleChangeText(value)}
