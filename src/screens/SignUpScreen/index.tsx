@@ -1,4 +1,9 @@
 import React, { useCallback, useState } from "react";
+import {
+    NavigationParams,
+    NavigationScreenProp,
+    NavigationState,
+} from "react-navigation";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../context/authContext";
@@ -10,9 +15,15 @@ import {
     ErrorMessage,
     Row,
     InputElement,
+    LinkElement,
+    LinkLabel,
 } from "./styles";
 
-const SignUpScreen: React.FC = () => {
+interface ISignUpScreenProps {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+
+const SignUpScreen: React.FC<ISignUpScreenProps> = ({ navigation }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -55,6 +66,9 @@ const SignUpScreen: React.FC = () => {
                 <ErrorMessage>{state.errorMessage}</ErrorMessage>
             ) : null}
             <Button text="Sign Up" onPress={handleSignUp} />
+            <LinkElement onPress={() => navigation.navigate("SignIn")}>
+                <LinkLabel>Already have an account? Sign in instead</LinkLabel>
+            </LinkElement>
         </Container>
     );
 };
