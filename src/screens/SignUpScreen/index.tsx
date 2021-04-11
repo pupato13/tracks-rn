@@ -1,10 +1,6 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Alert, TextInput, TouchableOpacity } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { ActionType } from "../../context/authAction";
-import { signUp, teste, signUp_Teste, teste2 } from "../../context/authReducer";
-import { useAuthContext } from "../../context/autoContext";
 import { useDiego } from "../../context/diego";
 // import AuthContext from "../../context/authContext_old";
 
@@ -36,7 +32,7 @@ const SignUpScreen: React.FC = () => {
             email,
             password,
         });
-    }, [email, password]);
+    }, [email, password, signUp]);
 
     return (
         <Container>
