@@ -6,17 +6,12 @@ import React, {
 } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import api from "../services/api";
-import { ActionType, AuthActions } from "./authAction";
 import { IAuthState, initialState } from "./authState";
+import { ActionType, AuthActions, ICredentials } from "./authActions";
 
 const TOKEN_KEY = "@TrackersApp";
 
-interface ICredentials {
-    email: string;
-    password: string;
-}
-
-const diegoReducer = (state: IAuthState, action: AuthActions): IAuthState => {
+const authReducer = (state: IAuthState, action: AuthActions): IAuthState => {
     switch (action.type) {
         case ActionType.addError:
             return { ...state, errorMessage: action.payload };
@@ -27,15 +22,15 @@ const diegoReducer = (state: IAuthState, action: AuthActions): IAuthState => {
     }
 };
 
-export interface IDiegoContextData {
+export interface IAuthContextData {
     state: IAuthState;
     signUp: (credentials: ICredentials) => Promise<void>;
 }
 
-const DiegoContext = createContext<IDiegoContextData>({} as IDiegoContextData);
+const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
-const DiegoProvider: React.FC = ({ children }) => {
-    const [state, dispatch] = useReducer(diegoReducer, initialState);
+const AuthProvider: React.FC = ({ children }) => {
+    const [state, dispatch] = useReducer(authReducer, initialState);
 
     const signUp = useCallback(
         async ({ email, password }: ICredentials): Promise<void> => {
@@ -95,21 +90,21 @@ const DiegoProvider: React.FC = ({ children }) => {
     );
 
     return (
-        <DiegoContext.Provider
+        <AuthContext.Provider
             value={{
                 state,
                 signUp,
             }}
         >
             {children}
-        </DiegoContext.Provider>
+        </AuthContext.Provider>
     );
 };
 
-function useDiego(): IDiegoContextData {
-    const context = useContext(DiegoContext);
+function useAuth(): IAuthContextData {
+    const context = useContext(AuthContext);
 
     return context;
 }
 
-export { DiegoProvider, useDiego };
+export { AuthProvider, useAuth };

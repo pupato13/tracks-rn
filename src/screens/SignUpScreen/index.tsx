@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-import { useDiego } from "../../context/diego";
-// import AuthContext from "../../context/authContext_old";
+import { useAuth } from "../../context/authContext";
 
 import {
     Container,
@@ -18,7 +17,7 @@ const SignUpScreen: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const { state, signUp } = useDiego();
+    const { state, signUp } = useAuth();
 
     const handleSignUp = useCallback(async () => {
         console.log("");

@@ -1,10 +1,16 @@
 import { IAuthState } from "./authState";
 
+// eslint-disable-next-line no-shadow
 export enum ActionType {
     signUp,
     signIn,
     signOut,
     addError,
+}
+
+export interface ICredentials {
+    email: string;
+    password: string;
 }
 
 export interface ISignUp {
