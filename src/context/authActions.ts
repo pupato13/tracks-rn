@@ -15,12 +15,12 @@ export interface ICredentials {
 
 export interface ISignUp {
     type: ActionType.signUp;
-    payload: IAuthState;
+    payload: string;
 }
 
 export interface ISignIn {
     type: ActionType.signIn;
-    payload: IAuthState;
+    payload: string;
 }
 
 export interface ISignOut {

@@ -10,7 +10,6 @@ import {
     ErrorMessage,
     Row,
     InputElement,
-    InputLabel,
 } from "./styles";
 
 const SignUpScreen: React.FC = () => {
@@ -20,13 +19,6 @@ const SignUpScreen: React.FC = () => {
     const { state, signUp } = useAuth();
 
     const handleSignUp = useCallback(async () => {
-        console.log("");
-        console.log("CALL HANDLE SIGN UP");
-        console.log("");
-        console.log("Email -> ", email);
-        console.log("Password -> ", password);
-        console.log("");
-
         await signUp({
             email,
             password,
